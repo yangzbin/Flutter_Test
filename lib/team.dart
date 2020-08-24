@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class TeamPage extends StatefulWidget {
   @override
-  _teamPageState createState() => _teamPageState();
+  _TeamPageState createState() => _TeamPageState();
 }
 
-class _teamPageState extends State<TeamPage> {
+class _TeamPageState extends State<TeamPage> {
 
   @override
   Widget build(BuildContext context) {
