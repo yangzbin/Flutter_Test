@@ -6,4 +6,5 @@ class NWApi{
   static final baseApi = 'https://www.sitopclouds.com/areamanager/';
   static final loginPath = 'user/login';//登录
   static final meterList = 'meter/list';//电表列表
+  static final teamList = 'user/my/team';//我的团队
 }
