@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
   String phone = '';
   String password = '';
   //手机号的控制器
-  TextEditingController phoneController = TextEditingController(text:"18291510005");//input 设置初始值
+  TextEditingController phoneController = TextEditingController(text:"182****0005");//input 设置初始值
   //密码
   TextEditingController psController = TextEditingController(text:"123456");//input 设置初始值
   @override
