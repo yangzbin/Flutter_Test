@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermanager/search.dart';
+import 'package:fluttermanager/team.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'user.dart';
 
@@ -86,11 +87,9 @@ class _homePageState extends State<HomePage> {
                     text: '我的团队',
                     imgUrl: 'images/home_icon_team.png',
                     onPressed: () {
-                      Fluttertoast.showToast(
-                        msg: "我的团队",
-                        backgroundColor: Color(0xFF028A81),
-                        textColor: Colors.white,
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return TeamPage();
+                      }));
                     },
                   ),
                   ItemView(

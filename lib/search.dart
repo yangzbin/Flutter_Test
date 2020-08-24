@@ -31,6 +31,7 @@ class _searchPageState extends State<SearchPage> {
     DioManager().request<MeterListEntity>(NWMethod.POST, NWApi.meterList,
         params: paramsMap, success: (data) {
           setState(() {
+            //刷新页面
             meters.clear();
             meters.addAll(data.list);
           });
