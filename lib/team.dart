@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttermanager/httpUtil/DioManager.dart';
@@ -34,10 +33,13 @@ class _TeamPageState extends State<TeamPage> {
           centerTitle: true,
         ),
         body: teams.length > 0
-            ? Container(
-                constraints: BoxConstraints.expand(),
-                color: Color(0xfff8f8f8),
-                child: childWidget(context),
+            ? RefreshIndicator(
+                child: Container(
+                  constraints: BoxConstraints.expand(),
+                  color: Color(0xfff8f8f8),
+                  child: childWidget(context),
+                ),
+                onRefresh: _refreshData,
               )
             : ViewNoDataPage());
   }
@@ -53,7 +55,11 @@ class _TeamPageState extends State<TeamPage> {
       print("error code = ${error.errorCode}, massage = ${error.message}");
     });
   }
+  Future<void> _refreshData() async{
+    getMyTeamList();
+  }
 }
+
 //主页面
 Widget childWidget(BuildContext context) {
   Widget childWidget;
@@ -61,7 +67,7 @@ Widget childWidget(BuildContext context) {
     childWidget = new ListView.builder(
       itemCount: teams.length,
       itemBuilder: (context, pos) {
-        return _cellForRow(teams[pos],context);
+        return _cellForRow(teams[pos], context);
       },
     );
   } else {
@@ -87,8 +93,9 @@ Widget childWidget(BuildContext context) {
   }
   return childWidget;
 }
+
 // 相当于itemView
-Widget _cellForRow(TeamListEntity user,BuildContext context) {
+Widget _cellForRow(TeamListEntity user, BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: 10), // 上间距
     color: Colors.white,
@@ -96,22 +103,29 @@ Widget _cellForRow(TeamListEntity user,BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         InkWell(
-          child: Image.network(NWApi.baseApi + user.portraitUrl,width: 60,),
-          onTap: (){//查看大图
-            lookBigPicture(context,NWApi.baseApi + user.portraitUrl);
+          child: Image.network(
+            NWApi.baseApi + user.portraitUrl,
+            width: 60,
+          ),
+          onTap: () {
+            //查看大图
+            lookBigPicture(context, NWApi.baseApi + user.portraitUrl);
           },
         ),
         Padding(
           padding: new EdgeInsets.only(left: 10),
-          child: Text(user.realName,style: TextStyle(fontSize: 15,color: Color(0xff333333))),
+          child: Text(user.realName,
+              style: TextStyle(fontSize: 15, color: Color(0xff333333))),
         )
       ],
     ),
   );
 }
-void lookBigPicture(BuildContext context,String s) {
-  Navigator.of(context).push(new FadeRoute(page: PhotoViewSimpleScreen(
-    imageProvider:NetworkImage(s),
+
+void lookBigPicture(BuildContext context, String s) {
+  Navigator.of(context).push(new FadeRoute(
+      page: PhotoViewSimpleScreen(
+    imageProvider: NetworkImage(s),
     heroTag: 'simple',
   )));
 }
