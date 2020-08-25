@@ -96,7 +96,7 @@ class _userPageState extends State<UserPage> {
                 ListTile(
                   title: Text('男',textAlign: TextAlign.center),
                   onTap: () {
-                    Navigator.pop(context, 0);
+                    Navigator.pop(context, 0);//返回值
                   },
                 ),
                 ListTile(
@@ -118,7 +118,7 @@ class _userPageState extends State<UserPage> {
     );
     //print(option);
     setState(() {
-      if(option ==0 || option ==1){
+      if(option == 0 || option == 1){
         getLogin().setSex = option;
       }
     });

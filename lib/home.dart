@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttermanager/search.dart';
 import 'package:fluttermanager/team.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 import 'user.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _homePageState extends State<HomePage> {
+  /*扫码*/
+  Future<void> sanQ() async {
+    String cameraScanResult = await scanner.scan();
+    //print("扫码结果"+cameraScanResult);
+    Fluttertoast.showToast(
+        msg: cameraScanResult,
+        backgroundColor: Color(0xFF028A81),
+        textColor: Colors.white);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +45,8 @@ class _homePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                          return SearchPage();
-                        }));
+                      return SearchPage();
+                    }));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -76,18 +87,20 @@ class _homePageState extends State<HomePage> {
                     text: '扫一扫',
                     imgUrl: 'images/home_icon_sweep.png',
                     onPressed: () {
-                      Fluttertoast.showToast(
-                        msg: "扫一扫",
-                        backgroundColor: Color(0xFF028A81),
-                        textColor: Colors.white,
-                      );
+//                      Fluttertoast.showToast(
+//                        msg: "扫一扫",
+//                        backgroundColor: Color(0xFF028A81),
+//                        textColor: Colors.white,
+//                      );
+                      sanQ();
                     },
                   ),
                   ItemView(
                     text: '我的团队',
                     imgUrl: 'images/home_icon_team.png',
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return TeamPage();
                       }));
                     },
