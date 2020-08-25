@@ -84,6 +84,46 @@ class _userPageState extends State<UserPage> {
     });
   }
 
+  /*底部弹出选择框*/
+  Future _openModalBottomSheet() async {
+    final option = await showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 200.0,
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  title: Text('男',textAlign: TextAlign.center),
+                  onTap: () {
+                    Navigator.pop(context, 0);
+                  },
+                ),
+                ListTile(
+                  title: Text('女',textAlign: TextAlign.center),
+                  onTap: () {
+                    Navigator.pop(context, 1);
+                  },
+                ),
+                ListTile(
+                  title: Text('取消',textAlign: TextAlign.center),
+                  onTap: () {
+                    Navigator.pop(context, '取消');
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+    );
+    //print(option);
+    setState(() {
+      if(option ==0 || option ==1){
+        getLogin().setSex = option;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,6 +241,9 @@ class _userPageState extends State<UserPage> {
                           lable: '性别',
                           value: getLogin().sex==0?'男':'女',
                           width: 60,
+                          onPressed: (){
+                            _openModalBottomSheet();
+                          },
                         ),
                         Divider(
                           height: 1.0,

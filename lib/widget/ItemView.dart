@@ -3,13 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemView extends StatelessWidget {
-  ItemView({@required this.lable, @required this.value, this.textSize = 15,this.top=15,this.width});
+  ItemView({@required this.lable, @required this.value, this.textSize = 15,this.top=15,this.width,this.onPressed});
 
   final String lable;
   final String value;
   final double textSize;
   final double top;
   final double width;
+
+  //点击回调
+  final GestureTapCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,14 @@ class ItemView extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Text(
-              value,
-              style: TextStyle(fontSize: textSize, color: Color(0xff333333)),
-              textAlign: TextAlign.start,
-            ),
+           child: InkWell(
+             child: Text(
+               value,
+               style: TextStyle(fontSize: textSize, color: Color(0xff333333)),
+               textAlign: TextAlign.start,
+             ),
+             onTap: onPressed,
+           ),
           )
         ],
       ),

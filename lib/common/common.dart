@@ -1,4 +1,3 @@
-import 'package:fluttermanager/httpUtil/cookie.dart';
 import 'package:fluttermanager/models/login_entity.dart';
 
 //登录信息

@@ -38,7 +38,10 @@ class LoginEntity {
   int get userRole => _userRole;
   int get deleteState => _deleteState;
 
-  LoginEntity _loginEntity;
+
+  set setSex(int value) {
+    _sex = value;
+  }
 
   LoginEntity({
       int sex, 
