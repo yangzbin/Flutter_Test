@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttermanager/httpUtil/DioManager.dart';
@@ -6,6 +7,8 @@ import 'package:fluttermanager/httpUtil/NWMethod.dart';
 import 'package:fluttermanager/widget/ViewNoData.dart';
 
 import 'models/team_list_entity.dart';
+import 'routeUtil/FadeRoute.dart';
+import 'widget/PhotoViewSimpleScreen.dart';
 
 class TeamPage extends StatefulWidget {
   @override
@@ -34,7 +37,7 @@ class _TeamPageState extends State<TeamPage> {
             ? Container(
                 constraints: BoxConstraints.expand(),
                 color: Color(0xfff8f8f8),
-                child: childWidget(),
+                child: childWidget(context),
               )
             : ViewNoDataPage());
   }
@@ -52,13 +55,13 @@ class _TeamPageState extends State<TeamPage> {
   }
 }
 //主页面
-Widget childWidget() {
+Widget childWidget(BuildContext context) {
   Widget childWidget;
   if (teams != null && teams.length != 0) {
     childWidget = new ListView.builder(
       itemCount: teams.length,
       itemBuilder: (context, pos) {
-        return _cellForRow(teams[pos]);
+        return _cellForRow(teams[pos],context);
       },
     );
   } else {
@@ -85,16 +88,30 @@ Widget childWidget() {
   return childWidget;
 }
 // 相当于itemView
-Widget _cellForRow(TeamListEntity user) {
+Widget _cellForRow(TeamListEntity user,BuildContext context) {
   return Container(
     margin: EdgeInsets.only(top: 10), // 上间距
     color: Colors.white,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Image.network(NWApi.baseApi + user.portraitUrl,width: 60,),
-        Text(user.realName,style: TextStyle(fontSize: 15,color: Color(0xff333333)))
+        InkWell(
+          child: Image.network(NWApi.baseApi + user.portraitUrl,width: 60,),
+          onTap: (){//查看大图
+            lookBigPicture(context,NWApi.baseApi + user.portraitUrl);
+          },
+        ),
+        Padding(
+          padding: new EdgeInsets.only(left: 10),
+          child: Text(user.realName,style: TextStyle(fontSize: 15,color: Color(0xff333333))),
+        )
       ],
     ),
   );
+}
+void lookBigPicture(BuildContext context,String s) {
+  Navigator.of(context).push(new FadeRoute(page: PhotoViewSimpleScreen(
+    imageProvider:NetworkImage(s),
+    heroTag: 'simple',
+  )));
 }
