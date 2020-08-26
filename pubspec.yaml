@@ -44,6 +44,8 @@ dependencies:
   #amap_map_fluttify: ^0.25.0
   #时间选择器
   flutter_datetime_picker: ^1.4.0
+  #文件选择器
+  file_picker: ^1.13.3
 
 dev_dependencies:
   flutter_test:

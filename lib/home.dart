@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermanager/scan.dart';
@@ -6,6 +8,7 @@ import 'package:fluttermanager/select.dart';
 import 'package:fluttermanager/team.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
+import 'package:file_picker/file_picker.dart';
 import 'user.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,6 +28,11 @@ class _homePageState extends State<HomePage> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ScanPage(meterNum: cameraScanResult);
     }));
+  }
+  /*选择文件*/
+  Future<void> selectFile() async{
+    File file = await FilePicker.getFile(type: FileType.custom,allowedExtensions: ['jpg', 'pdf', 'doc']);
+    print("文件路径"+file.path);
   }
 
   @override
@@ -159,11 +167,12 @@ class _homePageState extends State<HomePage> {
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
-                        Fluttertoast.showToast(
-                          msg: "一键导入",
-                          backgroundColor: Color(0xFF028A81),
-                          textColor: Colors.white,
-                        );
+//                        Fluttertoast.showToast(
+//                          msg: "一键导入",
+//                          backgroundColor: Color(0xFF028A81),
+//                          textColor: Colors.white,
+//                        );
+                        selectFile();
                       },
                       padding: EdgeInsets.only(
                           top: 17, bottom: 17, left: 28, right: 28),
