@@ -1,4 +1,5 @@
 import 'package:flustars/flustars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermanager/common/common.dart';
 import 'package:fluttermanager/widget/ItemView.dart';
@@ -99,7 +100,39 @@ class _ScanPageState extends State<ScanPage> {
                       ItemView(lable: '地址',value: getLogin().region,),
                     ],
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  width: double.infinity,
+                  color: Colors.white,
+                  padding: EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text('经纬度',style: TextStyle(color: Color(0xff999999),fontSize: 15)),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text('323,233',style: TextStyle(color: Color(0xff333333),fontSize: 15)),
+                            )
+                          ],
+                        ),
+                      ),
+                      Image.asset('images/icon_position.png',width: 20,)
+                    ],
+                  ),
+                ),
+//                Container(//地图
+//                  width: double.infinity,
+//                  height: 120,
+//                  child: Text('地图'),
+//                )
+
               ],
             ),
           ),
