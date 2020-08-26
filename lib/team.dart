@@ -32,16 +32,15 @@ class _TeamPageState extends State<TeamPage> {
               Text("我的团队", style: TextStyle(fontSize: 17, color: Colors.white)),
           centerTitle: true,
         ),
-        body: teams.length > 0
-            ? RefreshIndicator(
+        body: RefreshIndicator(
                 child: Container(
                   constraints: BoxConstraints.expand(),
                   color: Color(0xfff8f8f8),
-                  child: childWidget(context),
+                  child: teams.length > 0 ? childWidget(context):ViewNoDataPage(),
                 ),
                 onRefresh: _refreshData,
-              )
-            : ViewNoDataPage());
+              ),
+    );
   }
 
   void getMyTeamList() {
