@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermanager/scan.dart';
 import 'package:fluttermanager/search.dart';
 import 'package:fluttermanager/team.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,10 +17,14 @@ class _homePageState extends State<HomePage> {
   Future<void> sanQ() async {
     String cameraScanResult = await scanner.scan();
     //print("扫码结果"+cameraScanResult);
-    Fluttertoast.showToast(
-        msg: cameraScanResult,
-        backgroundColor: Color(0xFF028A81),
-        textColor: Colors.white);
+//    Fluttertoast.showToast(
+//        msg: cameraScanResult,
+//        backgroundColor: Color(0xFF028A81),
+//        textColor: Colors.white);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) {
+          return ScanPage(meterNum: cameraScanResult);
+        }));
   }
 
   @override
