@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttermanager/scan.dart';
 import 'package:fluttermanager/search.dart';
+import 'package:fluttermanager/select.dart';
 import 'package:fluttermanager/team.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
@@ -21,10 +22,9 @@ class _homePageState extends State<HomePage> {
 //        msg: cameraScanResult,
 //        backgroundColor: Color(0xFF028A81),
 //        textColor: Colors.white);
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return ScanPage(meterNum: cameraScanResult);
-        }));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ScanPage(meterNum: cameraScanResult);
+    }));
   }
 
   @override
@@ -136,11 +136,15 @@ class _homePageState extends State<HomePage> {
                       ),
                       onPressed: () {
 //                        Fluttertoast.showToast(msg: '一键导出');
-                        Fluttertoast.showToast(
-                          msg: "一键导出",
-                          backgroundColor: Color(0xFF028A81),
-                          textColor: Colors.white,
-                        );
+//                        Fluttertoast.showToast(
+//                          msg: "一键导出",
+//                          backgroundColor: Color(0xFF028A81),
+//                          textColor: Colors.white,
+//                        );
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return SelectPage();
+                        }));
                       },
                       padding: EdgeInsets.only(
                           top: 17, bottom: 17, left: 28, right: 28),
