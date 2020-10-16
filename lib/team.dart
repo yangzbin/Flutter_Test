@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttermanager/httpUtil/DioManager.dart';
 import 'package:fluttermanager/httpUtil/NWApi.dart';
 import 'package:fluttermanager/httpUtil/NWMethod.dart';
+import 'package:fluttermanager/teamDetail.dart';
 import 'package:fluttermanager/toastUtil/YToast.dart';
 import 'package:fluttermanager/widget/ViewNoData.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -100,7 +101,10 @@ Widget _cellForRow(TeamListEntity user, BuildContext context) {
   return GestureDetector(
     onTap: (){
       //点击事件
-      YToast.showText(user.realName);
+      //YToast.showText(user.realName);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return TeamDetailPage(user: user);
+      }));
     },
     child: Container(
       margin: EdgeInsets.only(top: 10), // 上间距
