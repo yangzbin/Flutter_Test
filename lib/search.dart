@@ -83,6 +83,7 @@ class _searchPageState extends State<SearchPage> {
                   style:
                   TextStyle(color: Color(0xff333333), fontSize: 15),
                   onChanged: (value) {
+                    //搜索
                     getMeterList(value);
                   },
                 )),
