@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermanager/toastUtil/YToast.dart';
 import 'package:fluttermanager/widget/ItemInputView.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -74,11 +75,7 @@ class _pswordPageState extends State<PswordPage> {
                     padding: EdgeInsets.only(left: 28,right: 28),
                     child:  RaisedButton(
                       onPressed: canSubmit?(){
-                        Fluttertoast.showToast(
-                          msg: "提交",
-                          backgroundColor: Color(0xFF028A81),
-                          textColor: Colors.white,
-                        );
+                        YToast.showText('提交');
                       }:null,
                       textColor: Colors.white,
                       disabledTextColor: Color(0xffbbbbbb),

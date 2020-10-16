@@ -3,7 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttermanager/httpUtil/DioManager.dart';
 import 'package:fluttermanager/httpUtil/NWApi.dart';
 import 'package:fluttermanager/httpUtil/NWMethod.dart';
+import 'package:fluttermanager/toastUtil/YToast.dart';
 import 'package:fluttermanager/widget/ViewNoData.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'models/team_list_entity.dart';
 import 'routeUtil/FadeRoute.dart';
@@ -95,28 +97,34 @@ Widget childWidget(BuildContext context) {
 
 // 相当于itemView
 Widget _cellForRow(TeamListEntity user, BuildContext context) {
-  return Container(
-    margin: EdgeInsets.only(top: 10), // 上间距
-    color: Colors.white,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        InkWell(
-          child: Image.network(
-            NWApi.baseApi + user.portraitUrl,
-            width: 60,
+  return GestureDetector(
+    onTap: (){
+      //点击事件
+      YToast.showText(user.realName);
+    },
+    child: Container(
+      margin: EdgeInsets.only(top: 10), // 上间距
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          InkWell(
+            child: Image.network(
+              NWApi.baseApi + user.portraitUrl,
+              width: 60,
+            ),
+            onTap: () {
+              //查看大图
+              lookBigPicture(context, NWApi.baseApi + user.portraitUrl);
+            },
           ),
-          onTap: () {
-            //查看大图
-            lookBigPicture(context, NWApi.baseApi + user.portraitUrl);
-          },
-        ),
-        Padding(
-          padding: new EdgeInsets.only(left: 10),
-          child: Text(user.realName,
-              style: TextStyle(fontSize: 15, color: Color(0xff333333))),
-        )
-      ],
+          Padding(
+            padding: new EdgeInsets.only(left: 10),
+            child: Text(user.realName,
+                style: TextStyle(fontSize: 15, color: Color(0xff333333))),
+          )
+        ],
+      ),
     ),
   );
 }

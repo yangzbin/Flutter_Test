@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttermanager/httpUtil/DioManager.dart';
 import 'package:fluttermanager/models/meter_list_entity.dart';
+import 'package:fluttermanager/toastUtil/YToast.dart';
 import 'package:fluttermanager/widget/ItemView.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'httpUtil/NWApi.dart';
 import 'httpUtil/NWMethod.dart';
@@ -100,42 +102,48 @@ class _searchPageState extends State<SearchPage> {
   }
 }
 // 相当于itemView
+//使用GestureDetector 手势检测器 可以给 widget添加点击事件
 Widget _cellForRow(Meter meter) {
-  return Container(
-    margin: EdgeInsets.only(top: 10), // 上间距
-    color: Colors.white,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      //Column 上下布局  Row 横向布局  Stack 层级布局
-      //上下布局
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(top: 10, left: 15,bottom: 10),
-          child: Text(
-            meter.accountName,
-            style: TextStyle(fontSize: 16, color: Color(0xff333333)),
-            textAlign: TextAlign.start,
+  return GestureDetector(
+    onTap: (){
+     YToast.showText(meter.accountName);
+    },
+    child: Container(
+      margin: EdgeInsets.only(top: 10), // 上间距
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //Column 上下布局  Row 横向布局  Stack 层级布局
+        //上下布局
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 10, left: 15,bottom: 10),
+            child: Text(
+              meter.accountName,
+              style: TextStyle(fontSize: 16, color: Color(0xff333333)),
+              textAlign: TextAlign.start,
+            ),
           ),
-        ),
-        ItemView(
-          lable: '电表条码：',
-          value: meter.meterNumber,
-          textSize: 14,
-          top: 0,
-        ),
-        ItemView(
-          lable: '电话：',
-          value: meter.accountPhone,
-          textSize: 14,
-          top: 0,
-        ),
-        ItemView(
-          lable: '地址：',
-          value: meter.accountAddress,
-          textSize: 14,
-          top: 0,
-        ),
-      ],
+          ItemView(
+            lable: '电表条码：',
+            value: meter.meterNumber,
+            textSize: 14,
+            top: 0,
+          ),
+          ItemView(
+            lable: '电话：',
+            value: meter.accountPhone,
+            textSize: 14,
+            top: 0,
+          ),
+          ItemView(
+            lable: '地址：',
+            value: meter.accountAddress,
+            textSize: 14,
+            top: 0,
+          ),
+        ],
+      ),
     ),
   );
 }
