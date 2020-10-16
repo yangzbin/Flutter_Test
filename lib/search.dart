@@ -79,11 +79,11 @@ class _searchPageState extends State<SearchPage> {
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 0, vertical: 12)),
-                  keyboardType: TextInputType.visiblePassword,
+                  keyboardType: TextInputType.text,
                   style:
                   TextStyle(color: Color(0xff333333), fontSize: 15),
                   onChanged: (value) {
-                    //getMeterList(value);
+                    getMeterList(value);
                   },
                 )),
           ),
