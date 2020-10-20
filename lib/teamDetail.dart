@@ -44,7 +44,7 @@ class _TeamDetailPageState extends State<TeamDetailPage> {
                 color: Color(0xfff8f8f8),
               ),
               ItemView(
-                lable: '电话',
+                lable: '手机号码',
                 value: widget.user.userPhone,
                 width: 60,
               ),
